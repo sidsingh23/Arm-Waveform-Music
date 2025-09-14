@@ -2,51 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Wave from Python</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.39/Tone.js"></script>
+  <title>Arm Waveform Music</title>
 </head>
 <body>
-  <script>
-    let waveform = [0, 0, 0, 0, 0, 0]; // default empty wave
-    let osc;
+  <canvas id="waveCanvas"></canvas> <!-- maybe p5.js canvas will create here? need to check -->
+  
 
-    // setup p5.js canvas
-    function setup() {
-      createCanvas(600, 300);
-      background(0);
-      stroke(0, 255, 0);
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tone/build/Tone.js"></script>
+  
+  <script src="armSynth.js"></script>
 
-      // Tone.js oscillator
-      osc = new Tone.Oscillator({
-        type: "custom",
-        partials: waveform
-      }).toDestination();
-      osc.start();
-
-      // connect to Python WebSocket server
-      const socket = new WebSocket("ws://localhost:8008");
-      socket.onmessage = (event) => {
-        let data = JSON.parse(event.data);
-        waveform = data.waveform;
-
-        // update oscillator shape
-        osc.partials = waveform;
-      };
-    }
-
-    function draw() {
-      background(0);
-      noFill();
-      stroke(0, 255, 0);
-      beginShape();
-      for (let i = 0; i < waveform.length; i++) {
-        let x = map(i, 0, waveform.length - 1, 0, width);
-        let y = map(waveform[i], -1, 1, height, 0);
-        vertex(x, y);
-      }
-      endShape();
-    }
-  </script>
 </body>
 </html>
