@@ -15,14 +15,13 @@ SEND_DATA = True  # False if you wanna pause
 
 async def send_wave(websocket):
     cap = cv2.VideoCapture(0)
-    smoothed_wave = np.zeros(6)  # initial smoothing buffer
+    smoothing = np.zeros(6)  # initial smoothing buffer
 
     while True:
         ret, frame = cap.read()
         if not ret:
             continue
 
-        # flip frame for mirror effect
         frame = cv2.flip(frame, 1)
         frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         results = pose.process(frame_rgb)
@@ -47,12 +46,12 @@ async def send_wave(websocket):
             msg = json.dumps({"waveform": smoothing.tolist()})
             await websocket.send(msg)
 
-        await asyncio.sleep(0.03)  # ~30 FPS
+        await asyncio.sleep(0.03)  # 30 FPS ish
 
 async def main():
     async with websockets.serve(send_wave, "localhost", 8008):
         print("Server running on ws://localhost:8008")
-        await asyncio.Future()  # keep running
+        await asyncio.Future()  # keep it running forever
 
 if __name__ == "__main__":
     asyncio.run(main())
