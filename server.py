@@ -36,8 +36,8 @@ async def send_wave(websocket):
                 results.pose_landmarks.landmark[mp_pose.PoseLandmark.RIGHT_WRIST],
             ]
 
-            # extract y-coordinates, invert for canvas (0 top, 1 bottom)
-            y_values = np.array([1 - p.y for p in points])
+            y_values = np.array([(1 - p.y) * 2 - 1 for p in points])
+
 
             alpha = 0.5
             smoothing = alpha * y_values + (1 - alpha) * smoothing
