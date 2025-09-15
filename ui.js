@@ -15,7 +15,7 @@ function drawWave(waveform) {
   beginShape();
   waveform.forEach((y, i) => {
     const x = map(i, 0, waveform.length - 1, 0, width);
-    const yPos = y * height;
+    const yPos = map(y, -1, 1, height, 0);
     vertex(x, yPos);
   });
   endShape();
