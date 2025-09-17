@@ -10,6 +10,7 @@ function windowResized() {
 function drawWave(waveform) {
   background(0);
   stroke(0, 255, 0);
+  strokeWeight(5);
   noFill();
 
   beginShape();
