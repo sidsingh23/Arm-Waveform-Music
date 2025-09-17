@@ -22,7 +22,6 @@ async def send_wave(websocket):
         if not ret:
             continue
 
-        frame = cv2.flip(frame, 1)
         frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         results = pose.process(frame_rgb)
 
@@ -49,9 +48,9 @@ async def send_wave(websocket):
         await asyncio.sleep(0.03)  # 30 FPS ish
 
 async def main():
-    async with websockets.serve(send_wave, "localhost", 8008):
-        print("Server running on ws://localhost:8008")
-        await asyncio.Future()  # keep it running forever
+    async with websockets.serve(send_wave, "localhost", 8009):
+        print("Server running on ws://localhost:8009")
+        await asyncio.Future()  # keep it running forever (or until i end it with ctrl+c)
 
 if __name__ == "__main__":
     asyncio.run(main())
