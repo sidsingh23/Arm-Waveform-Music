@@ -1,6 +1,6 @@
 # Arm Waveform Music
 
-This project turns **arm movement into sound and visuals** using computer vision and real-time audio synthesis.  
+This project turns arm movement into sound and visuals using computer vision and real-time audio synthesis.  
 It uses MediaPipe to track arm positions, streams them over WebSockets with Python. 
 Visual and audio output of the motion happens in the browser using p5.js and Tone.js.
 
