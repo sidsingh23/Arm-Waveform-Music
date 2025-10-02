@@ -10,20 +10,9 @@ Visual and audio output of the motion happens in the browser using p5.js and Ton
 - Tracks 6 points across your wingspan with MediaPipe
 - Generates a waveform based on your arm shape
 - Visualizes the waveform in real time with p5.js
-- Maps arm movement to a theremin-like synthesizer in Tone.js
+- Maps arm movement to a synthesizer with Tone.js
 
 ---
-
-## Steps to run this code on your own
-   ```
-   git clone https://github.com/YOUR_USERNAME/arm-waveform-music.git
-   cd arm-waveform-music
-   pip install -r requirements.txt
-   python server.py
-   ```
-  Then, open index.html in browser, and click the screen to start audio output.
-  Enjoy!
-
 
   ## Next steps
 
